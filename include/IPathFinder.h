@@ -4,8 +4,7 @@
 class IPathFinder
 {
 public:
-    IPathFinder(/* args */);
-    ~IPathFinder();
+    virtual ~IPathFinder() {}; 
 
     virtual bool findPath() = 0; 
 
