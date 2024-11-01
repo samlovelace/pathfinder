@@ -4,8 +4,6 @@ project(pathfinder)
 find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
 
 set(SOURCES
-    ${CMAKE_CURRENT_LIST_DIR}/src/Agent.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/AstarPathFinder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/BfsPathFinder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Grid.cpp

@@ -12,7 +12,7 @@ public:
         return instance;
     }
 
-    enum class CellState
+    enum CellState
     {
         EMPTY = 0,
         OBSTACLE = -1,
@@ -34,15 +34,21 @@ public:
     bool addSingleObstacle(int x, int y);
     bool addObstacle(int x, int y, int width, int height);
 
-    int getGridHeight() { return mGridHeight; }
-    int getGridWidth() { return mGridWidth; }
+    int getHeight() { return mGridHeight; }
+    int getWidth() { return mGridWidth; }
+    std::pair<int, int> getStart();
+    std::pair<int, int> getGoal();
 
     std::vector<std::vector<CellState>>& getGrid() { return mGrid; }
+
+    bool addPath(std::vector<std::pair<int, int>> aPath);
 
     bool addAgent(int x, int y);
     bool addGoal(int x, int y);
 
     bool addEntities(std::vector<Entity> aVectorOfEntities);
+
+
 
 
 private:

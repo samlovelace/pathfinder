@@ -1,7 +1,8 @@
 #include "Grid.h"
 #include <iostream>
 
-Grid::Grid() : mGridHeight(20), mGridWidth(20), mGrid(mGridHeight, std::vector<Grid::CellState>(mGridWidth, Grid::CellState::EMPTY))
+Grid::Grid() : mGridHeight(50), mGridWidth(50), 
+                            mGrid(mGridHeight, std::vector<Grid::CellState>(mGridWidth, Grid::CellState::EMPTY))
 {
 
 }
@@ -9,6 +10,38 @@ Grid::Grid() : mGridHeight(20), mGridWidth(20), mGrid(mGridHeight, std::vector<G
 Grid::~Grid()
 {
 
+}
+
+std::pair<int, int> Grid::getStart()
+{
+    for (int i = 0; i < mGridHeight; i++)
+    {
+        for (int j = 0; j < mGridWidth; j++)
+        {
+            if (Grid::CellState::AGENT == mGrid[i][j])
+            {
+                return std::make_pair(i, j);
+            }
+        }
+    }
+
+    return std::make_pair(-1, -1);
+}
+
+std::pair<int, int> Grid::getGoal()
+{
+    for (int i = 0; i < mGridHeight; i++)
+    {
+        for (int j = 0; j < mGridWidth; j++)
+        {
+            if (Grid::CellState::GOAL == mGrid[i][j])
+            {
+                return std::make_pair(i, j);
+            }
+        }
+    }
+
+    return std::make_pair(-1, -1);
 }
 
 void Grid::print()
@@ -21,6 +54,21 @@ void Grid::print()
         }
         std::cout << std::endl;
     }
+}
+
+bool Grid::addPath(std::vector<std::pair<int, int>> aPath)
+{
+    for(auto node : aPath)
+    {
+        if(!isLocationOnGrid(node.first, node.second))
+        {
+            return false;
+        }
+
+        mGrid[node.first][node.second] = Grid::CellState::AGENT;
+    }
+
+    return true;
 }
 
 bool Grid::addEntities(std::vector<Entity> aVectorOfEntities)
