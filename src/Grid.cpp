@@ -2,7 +2,7 @@
 #include <iostream>
 
 Grid::Grid() : mGridHeight(50), mGridWidth(50), 
-                            mGrid(mGridHeight, std::vector<Grid::CellState>(mGridWidth, Grid::CellState::EMPTY))
+                            mGrid(mGridHeight, std::vector<Entity::CellState>(mGridWidth, Entity::CellState::EMPTY))
 {
 
 }
@@ -18,7 +18,7 @@ std::pair<int, int> Grid::getStart()
     {
         for (int j = 0; j < mGridWidth; j++)
         {
-            if (Grid::CellState::AGENT == mGrid[i][j])
+            if (Entity::CellState::AGENT == mGrid[i][j])
             {
                 return std::make_pair(i, j);
             }
@@ -34,7 +34,7 @@ std::pair<int, int> Grid::getGoal()
     {
         for (int j = 0; j < mGridWidth; j++)
         {
-            if (Grid::CellState::GOAL == mGrid[i][j])
+            if (Entity::CellState::GOAL == mGrid[i][j])
             {
                 return std::make_pair(i, j);
             }
@@ -65,32 +65,32 @@ bool Grid::addPath(std::vector<std::pair<int, int>> aPath)
             return false;
         }
 
-        mGrid[node.first][node.second] = Grid::CellState::AGENT;
+        mGrid[node.first][node.second] = Entity::CellState::AGENT;
     }
 
     return true;
 }
 
-bool Grid::addEntities(std::vector<Entity> aVectorOfEntities)
+bool Grid::addEntities(std::vector<Entity*> aVectorOfEntities)
 {
     for(auto entity : aVectorOfEntities)
     {
-        if(!isLocationOnGrid(entity.x, entity.y))
+        if(!isLocationOnGrid(entity->x(), entity->y()))
         {
             return false;
         }
 
-        if(Grid::CellState::OBSTACLE == entity.type)
+        if(Entity::CellState::OBSTACLE == entity->type())
         {
-            addObstacle(entity.x, entity.y, entity.width, entity.height);
+            addObstacle(entity->x(), entity->y(), entity->width(), entity->height());
         }
-        else if (Grid::CellState::AGENT == entity.type)
+        else if (Entity::CellState::AGENT == entity->type())
         {
-            addAgent(entity.x, entity.y);
+            addAgent(entity->x(), entity->y());
         }
-        else if (Grid::CellState::GOAL == entity.type)
+        else if (Entity::CellState::GOAL == entity->type())
         {
-            addGoal(entity.x, entity.y);
+            addGoal(entity->x(), entity->y());
         }
     }
 
@@ -105,7 +105,7 @@ bool Grid::addSingleObstacle(int x, int y)
         return false;
     }
 
-    mGrid[x][y] = Grid::CellState::OBSTACLE;
+    mGrid[x][y] = Entity::CellState::OBSTACLE;
     return true; 
 }
 
@@ -129,7 +129,7 @@ bool Grid::addAgent(int x, int y)
         return false;
     }
 
-    mGrid[x][y] = Grid::CellState::AGENT;
+    mGrid[x][y] = Entity::CellState::AGENT;
     return true;
 }
 
@@ -140,7 +140,7 @@ bool Grid::addGoal(int x, int y)
         return false;
     }
 
-    mGrid[x][y] = Grid::CellState::GOAL;
+    mGrid[x][y] = Entity::CellState::GOAL;
     return true;
 }
 

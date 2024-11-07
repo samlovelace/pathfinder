@@ -33,7 +33,7 @@ void Renderer::run()
 
 void Renderer::renderGrid(sf::RenderWindow& window, Grid& aGrid)
 {
-    std::vector<std::vector<Grid::CellState>> grid = aGrid.getGrid();
+    std::vector<std::vector<Entity::CellState>> grid = aGrid.getGrid();
 
     // Get the window size and calculate the center
     sf::Vector2u windowSize = window.getSize();
@@ -68,20 +68,20 @@ void Renderer::renderGrid(sf::RenderWindow& window, Grid& aGrid)
     }
 }
 
-sf::Color Renderer::getColorFromCellState(Grid::CellState aState)
+sf::Color Renderer::getColorFromCellState(Entity::CellState aState)
 {
     switch (aState)
     {
-    case Grid::CellState::EMPTY:
+    case Entity::CellState::EMPTY:
         return sf::Color::Black;
         break;
-    case Grid::CellState::OBSTACLE:
+    case Entity::CellState::OBSTACLE:
         return sf::Color::Red;
         break;
-    case Grid::CellState::AGENT:
+    case Entity::CellState::AGENT:
         return sf::Color::Blue;
         break;
-    case Grid::CellState::GOAL:
+    case Entity::CellState::GOAL:
         return sf::Color::Green;
         break;
     default:

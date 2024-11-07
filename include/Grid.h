@@ -2,6 +2,7 @@
 #define GRID_H
 
 #include <vector>
+#include "Entity.h"
 
 class Grid
 {
@@ -11,23 +12,6 @@ public:
         static Grid* instance = new Grid(); 
         return instance;
     }
-
-    enum CellState
-    {
-        EMPTY = 0,
-        OBSTACLE = -1,
-        AGENT = 1,
-        GOAL = 2
-    };
-
-    struct Entity
-    {
-        int x;
-        int y;
-        int width;
-        int height;
-        CellState type;
-    };
 
     void print();
 
@@ -39,17 +23,14 @@ public:
     std::pair<int, int> getStart();
     std::pair<int, int> getGoal();
 
-    std::vector<std::vector<CellState>>& getGrid() { return mGrid; }
+    std::vector<std::vector<Entity::CellState>>& getGrid() { return mGrid; }
 
     bool addPath(std::vector<std::pair<int, int>> aPath);
 
     bool addAgent(int x, int y);
     bool addGoal(int x, int y);
 
-    bool addEntities(std::vector<Entity> aVectorOfEntities);
-
-
-
+    bool addEntities(std::vector<Entity*> aVectorOfEntities);
 
 private:
     Grid();
@@ -66,7 +47,7 @@ private:
     int mGridWidth;
 
     // THE GRID 
-    std::vector<std::vector<CellState>> mGrid; 
+    std::vector<std::vector<Entity::CellState>> mGrid; 
 
     // THE ENTITIES
     //std::vector<Entity*> mEntities;

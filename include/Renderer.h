@@ -13,7 +13,7 @@ public:
     void run(); 
     void renderGrid(sf::RenderWindow& window, Grid& aGrid);
 
-    sf::Color getColorFromCellState(Grid::CellState aType);
+    sf::Color getColorFromCellState(Entity::CellState aType);
 
 private:
 

@@ -53,7 +53,7 @@ bool BfsPathFinder::findPath(Grid& grid)
             if(x >= 0 && x < grid.getWidth() && y >= 0 && y < grid.getHeight())
             {
                 // check if the neighbor is not visited and is not an obstacle
-                if(!mVisited[x][y] && grid.getGrid()[x][y] != Grid::CellState::OBSTACLE)
+                if(!mVisited[x][y] && grid.getGrid()[x][y] != Entity::CellState::OBSTACLE)
                 {
                     mQueue.push_back(std::make_pair(x, y));
                     mVisited[x][y] = true;
@@ -62,6 +62,8 @@ bool BfsPathFinder::findPath(Grid& grid)
             }
         }
     }
+
+    return false; 
 }
 
 
