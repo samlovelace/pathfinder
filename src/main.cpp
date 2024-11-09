@@ -10,8 +10,10 @@ int main()
 {
     ObstaclesManager* obsMan = new ObstaclesManager(75); 
     Renderer* renderer = new Renderer();
-    Agent* agent = new Agent(std::make_pair<int, int>(0, 0)); 
-    BfsPathFinder* bfs = new BfsPathFinder();
+    std::pair<int, int> start = std::make_pair<int, int>(0, 0); 
+
+    Agent* agent = new Agent(start); 
+    agent->setPathFinder(PathFinderType::BREADTHFIRSTSEARCH); 
 
     obsMan->generateObstacles();
 
@@ -27,7 +29,7 @@ int main()
 
     Grid::get()->addEntities(entities); 
 
-    if(!bfs->findPath(*Grid::get()))
+    if(!agent->traverseGrid(*Grid::get()))
     {
         printf("NO PATH TO GOAL EXISTS\n"); 
     } 

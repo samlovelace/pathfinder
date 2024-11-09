@@ -61,7 +61,7 @@ void Renderer::renderGrid(sf::RenderWindow& window, Grid& aGrid)
             cell.setPosition(x_position, y_position);   // Use offset for centering
             cell.setFillColor(getColorFromCellState(grid[i][j])); // Set the color based on the cell state
 
-            cell.setOutlineThickness(0.5);          // Create a grid-like outline
+            cell.setOutlineThickness(0.25);          // Create a grid-like outline
             cell.setOutlineColor(sf::Color::White);
             window.draw(cell); 
         }

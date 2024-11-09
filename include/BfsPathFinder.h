@@ -5,23 +5,22 @@
 #include <vector>
 #include <map>
 #include <Grid.h>
+#include "IPathFinder.h"
 
-class BfsPathFinder
+class BfsPathFinder : public IPathFinder
 {
 public:
     BfsPathFinder(/* args */);
-    ~BfsPathFinder();
+    ~BfsPathFinder() override; 
 
-    bool findPath(Grid& grid); 
-    void printPath(Grid& grid);
-    void printVisited(Grid& grid);
+    bool findPath(Grid& grid) override; 
+    //void printPath(Grid& grid);
+    //void printVisited(Grid& grid);
 
 
 private:
     std::deque<std::pair<int, int>> mQueue;
     std::vector<std::vector<bool>> mVisited;
-    const std::vector<std::pair<int, int>> mGridDirections = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
-    std::vector<std::pair<int, int>> mPath;
     std::map<std::pair<int, int>, std::pair<int, int>> mParents;
 };
 
