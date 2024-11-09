@@ -13,7 +13,8 @@ public:
     virtual bool findPath(Grid& aGrid) = 0; 
 
 protected:
-    const std::vector<std::pair<int, int>> mGridDirections = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+    const std::vector<std::pair<int, int>> mGridDirections = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    const std::vector<std::pair<int, int>> mGridDirectionsWithDiag = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
     std::vector<std::pair<int, int>> mPath; 
 
 };

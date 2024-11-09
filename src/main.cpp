@@ -8,11 +8,10 @@
 
 int main()
 {
-    ObstaclesManager* obsMan = new ObstaclesManager(75); 
-    Renderer* renderer = new Renderer();
-    std::pair<int, int> start = std::make_pair<int, int>(0, 0); 
+    auto obsMan = std::make_unique<ObstaclesManager>(125); 
+    auto start = std::make_pair(0, 0); 
+    auto agent = new Agent(start); 
 
-    Agent* agent = new Agent(start); 
     agent->setPathFinder(PathFinderType::BREADTHFIRSTSEARCH); 
 
     obsMan->generateObstacles();
@@ -34,5 +33,7 @@ int main()
         printf("NO PATH TO GOAL EXISTS\n"); 
     } 
 
-    renderer->run(); 
+    auto renderer = std::make_unique<Renderer>();
+    renderer->run();
+    delete agent; 
 }
