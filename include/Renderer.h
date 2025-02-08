@@ -3,11 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 #include "Grid.h"
+#include "Agent.h"
 
 class Renderer
 {
 public:
-    Renderer(/* args */);
+    Renderer(Agent& anAgent);
     ~Renderer();
 
     void run(); 
@@ -16,8 +17,8 @@ public:
     sf::Color getColorFromCellState(Entity::CellState aType);
 
 private:
-
     sf::RenderWindow* mWindow;
+    Agent& mAgent; 
 
 };
 

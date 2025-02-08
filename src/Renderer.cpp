@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-Renderer::Renderer(/* args */)
+Renderer::Renderer(Agent& agent) : mAgent(agent)
 {
 }
 
@@ -66,6 +66,20 @@ void Renderer::renderGrid(sf::RenderWindow& window, Grid& aGrid)
             window.draw(cell); 
         }
     }
+
+    sf::RectangleShape agent(sf::Vector2f(cell_size -1, cell_size-1));
+
+    std::pair<int, int> pos = mAgent.getCurrentPos(); 
+
+    float x = offsetX + (pos.first * cell_size); 
+    float y = offsetY + (pos.second * cell_size); 
+    agent.setPosition(x, y); 
+    agent.setFillColor(sf::Color::Blue); 
+    agent.setOutlineThickness(0.25);          // Create a grid-like outline
+    agent.setOutlineColor(sf::Color::White);
+
+    window.draw(agent); 
+
 }
 
 sf::Color Renderer::getColorFromCellState(Entity::CellState aState)

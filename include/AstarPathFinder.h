@@ -10,6 +10,7 @@ public:
     ~AstarPathFinder() override;
 
     bool findPath(Grid& aGrid) override; 
+    
 
 private: 
 

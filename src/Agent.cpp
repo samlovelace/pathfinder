@@ -17,7 +17,8 @@ Agent::~Agent()
 
 bool Agent::traverseGrid(Grid& aGrid)
 {
-    return mPathFinder->findPath(aGrid); 
+    mPathFinder->start(aGrid);  
+    return true; 
 }
 
 std::unique_ptr<IPathFinder> Agent::createPathFinder(PathFinderType aType)

@@ -5,10 +5,11 @@
 #include "BfsPathFinder.h"
 #include "ObstaclesManager.h"
 #include "Agent.h"
+#include <memory>
 
 int main()
 {
-    auto obsMan = std::make_unique<ObstaclesManager>(125); 
+    auto obsMan = std::make_unique<ObstaclesManager>(175); 
     auto start = std::make_pair(0, 0); 
     auto agent = new Agent(start); 
 
@@ -33,7 +34,7 @@ int main()
         printf("NO PATH TO GOAL EXISTS\n"); 
     } 
 
-    auto renderer = std::make_unique<Renderer>();
+    auto renderer = std::make_unique<Renderer>(*agent);
     renderer->run();
     delete agent; 
 }
